@@ -13,6 +13,7 @@ gem 'devise', '~> 4.4.0'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'font-awesome-rails'
+gem 'recaptcha'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 

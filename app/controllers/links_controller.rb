@@ -35,21 +35,16 @@ class LinksController < ApplicationController
   end
 
   # POST /links
-  # POST /links.json
   def create
     @link = Link.new(link_params)
     @link.user = current_user
     @link.domain = @domain
 
-    respond_to do |format|
-      if @link.save
-        # TBD: move to i18n strings
-        format.html {redirect_to @link, notice: 'Link was successfully created.'}
-        format.json {render :show, status: :created, location: @link}
-      else
-        format.html {render :new}
-        format.json {render json: @link.errors, status: :unprocessable_entity}
-      end
+    if @link.save && verify_recaptcha(model: @link)
+      # TBD: move to i18n strings
+      redirect_to @link, notice: 'Link was successfully created.'
+    else
+      render :new
     end
   end
 

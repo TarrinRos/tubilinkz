@@ -18,5 +18,14 @@
         <%= fa_icon('anchor', text: 'Submit') %>
       <% end %>
     </div>
+    <div class="form-group">
+      <!--
+       Проверка капчи при создании новой ссылки
+       https://github.com/ambethia/recaptcha
+      -->
+      <%= invisible_recaptcha_tags callback: 'submitInvisibleRecaptchaForm',
+                                   text: fa_icon('anchor', text: 'Submit'),
+                                   class: 'btn btn-primary' %>
+    </div>
   <% end %>
 </div>
