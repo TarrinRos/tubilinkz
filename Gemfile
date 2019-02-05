@@ -8,7 +8,7 @@ end
 gem 'rails'
 gem 'puma'
 
-gem 'devise', '~> 4.3.0'
+gem 'devise'
 
 gem 'jquery-rails'
 gem 'bootstrap'
