@@ -1,6 +1,12 @@
+# (c) goodprogrammer.ru
+#
+# Базовый класс для всех политик с набором типичных CRUDL действий
+# По умолчанию все действия, кроме show? запрещены
 class ApplicationPolicy
   attr_reader :user, :record
 
+  # По умолчанию Pundit в качестве первого аргумента
+  # подставляет current_user, если политика вызывается в контроллере
   def initialize(user, record)
     @user = user
     @record = record
@@ -11,7 +17,7 @@ class ApplicationPolicy
   end
 
   def show?
-    false
+    scope.where(:id => record.id).exists?
   end
 
   def create?
@@ -34,6 +40,14 @@ class ApplicationPolicy
     false
   end
 
+  def scope
+    Pundit.policy_scope!(user, record.class)
+  end
+
+  # Вложенный базовый класс Scope
+  # Его дочерние классы используется при вызове policy_scope(some_scope)
+  # для конкретной политики, а в качестве аргумента передается исходный скоуп,
+  # например Link.all
   class Scope
     attr_reader :user, :scope
 
@@ -43,7 +57,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope.all
+      scope
     end
   end
 end
