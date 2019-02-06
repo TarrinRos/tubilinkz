@@ -13,6 +13,9 @@ gem 'devise', '~> 4.4.0'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'font-awesome-rails'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 gem 'pundit'
 gem 'recaptcha'
 gem 'resque', '~> 1.27'
@@ -26,6 +29,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
 
+group :test do
+  gem 'factory_bot_rails'
+end
+
 group :production do
   gem 'pg'
 end
@@ -34,7 +41,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git'
 end
 
