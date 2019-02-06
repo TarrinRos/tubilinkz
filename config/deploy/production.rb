@@ -15,8 +15,10 @@
 # - web server (где живет nginx)
 # - database (где живет наш Postgres)
 # У нас все живет на одной машине.
-server 'bil-game.ru', user: 'deploy', roles: %w{app db web}
+server 'bil-game.ru', user: 'deploy', roles: %w{app db web resque}
 
+set :resque_enviroment_task, true
+set :workers, { "#{fetch(:application)}*" => 1 }
 
 # role-based syntax
 # ==================

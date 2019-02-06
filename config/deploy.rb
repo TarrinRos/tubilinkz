@@ -9,6 +9,10 @@ set :deploy_to, '/home/deploy/apps/tubilinkz'
 append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads'
 
+after 'deploy:restart', 'resque:restart'
+
+# даем возможность изменить ветку master (по умолчанию) на другую при вызове кэпа
+set :branch, ENV['branch'] if ENV['branch']
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
