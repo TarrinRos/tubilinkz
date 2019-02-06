@@ -16,8 +16,7 @@ class LinksController < ApplicationController
   after_action :verify_policy_scoped, only: :index
 
   def open
-    # increment clicks counter — in an atomic/thread-safe way
-    Link.increment_counter(:clicks, @link.id)
+    LinkClickedJob.perform_later(@link)
     redirect_to @link.url, status: :moved_permanently
   end
 
