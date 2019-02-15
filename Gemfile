@@ -38,11 +38,12 @@ group :production do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'awesome_rails_console'
+  gem 'byebug'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5'
-  gem 'byebug'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git'
+  gem 'sqlite3'
 end
 
 group :development do
